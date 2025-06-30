@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For My Love</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Great Vibes', cursive;
+      background: linear-gradient(135deg, #ffe6e6, #ffe0f0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Falling hearts container */
+    .falling-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .falling-hearts span {
+      position: absolute;
+      color: red;
+      animation: fall linear infinite;
+      font-size: 16px;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+      padding: 30px;
+      max-width: 600px;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 2s ease;
+      overflow-y: auto;
+      max-height: 90vh;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #d63384;
+    }
+
+    .heart {
+      width: 60px;
+      height: 54px;
+      position: relative;
+      margin: 20px auto;
+      transform: scale(1);
+      animation: beat 1s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 60px;
+      height: 90px;
+      background: #ff4d6d;
+      border-radius: 30px 30px 0 0;
+    }
+
+    .heart::before {
+      left: 30px;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    .heart::after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff4d6d;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #d63384;
+    }
+
+    .message {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #444;
+      animation: fadeIn 1s ease;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="falling-hearts" id="falling-hearts"></div>
+
+  <div class="card">
+    <h1>For You, My Love</h1>
+    <div class="heart"></div>
+    <button onclick="showMessage()">Click to Reveal</button>
+    <div class="message" id="message">
+My Love,
+
+From the moment you entered my life, everything changed. The colors became brighter, time felt softer, and my heart finally knew what it meant to truly beat. You’ve turned the ordinary into magic, and each day with you feels like a dream I never want to wake from.
+
+I want you to know — not just today, but every day — that you are my everything. My smile begins with your laughter, my peace begins with your voice, and my dreams begin and end with thoughts of you. I am so grateful for your love, your kindness, your soul. You are the rarest of gifts — one I promise to cherish, protect, and adore.
+
+There’s nothing I wouldn’t do to see you smile. You’ve made my heart your home, and I never want you to leave. Thank you for loving me, for trusting me, and for being you.
+
+Forever yours,
+Vedant Jadhav 
+    </div>
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById("message").style.display = "block";
+    }
+
+    // Create falling hearts dynamically
+    const container = document.getElementById('falling-hearts');
+
+    function createHeart() {
+      const heart = document.createElement('span');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      container.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    setInterval(createHeart, 200);
+  </script>
+</body>
+</html>
